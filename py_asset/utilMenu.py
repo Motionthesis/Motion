@@ -1,6 +1,8 @@
 #Util Menu
 from PyQt5 import QtCore, QtGui, QtWidgets
 from py_asset.uninstallMenu import Ui_UninstallAPK
+import py_asset.basicUtils as basicUtils  
+import os
 
 class Ui_Utility(object):
 
@@ -11,11 +13,39 @@ class Ui_Utility(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
+    #UI
+    def sAlert(self,filename):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Information")
+        msg.setText(filename)
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+        msg.exec_()
+    
+    def fAlert(self):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Information")
+        msg.setText("No Device Connected")
+        msg.setIcon(QtWidgets.QMessageBox.Critical)
+        msg.exec_()
+    ###
+
+    #Call Menu
     def uninstallMenu(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_UninstallAPK()
         self.ui.setupUi(self.window)
         self.window.show()
+    ###
+
+    def screenshotUI(self):
+        ts = basicUtils.screenshot()
+        if ts == "1":
+            self.fAlert()
+        else:
+            self.sAlert(str(os.getcwd())+"\\screenshot\\"+ts)
+
+    def sShell(self):
+        basicUtils.spawnShell()
 
     def setupUi(self, Utility):
         Utility.setObjectName("Utility")
@@ -30,10 +60,12 @@ class Ui_Utility(object):
         self.bScreenshoot = QtWidgets.QPushButton(Utility)
         self.bScreenshoot.setGeometry(QtCore.QRect(30, 10, 151, 51))
         self.bScreenshoot.setObjectName("bScreenshoot")
+        self.bScreenshoot.clicked.connect(self.screenshotUI)
 
         self.bShell = QtWidgets.QPushButton(Utility)
         self.bShell.setGeometry(QtCore.QRect(210, 10, 151, 51))
         self.bShell.setObjectName("bShell")
+        self.bShell.clicked.connect(self.sShell)
 
         self.bBack = QtWidgets.QPushButton(Utility)
         self.bBack.setGeometry(QtCore.QRect(10, 70, 81, 21))
