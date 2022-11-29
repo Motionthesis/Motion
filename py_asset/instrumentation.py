@@ -92,7 +92,7 @@ class Ui_Instrumentation(object):
         _translate = QtCore.QCoreApplication.translate
         Instrumentation.setWindowTitle(_translate("Instrumentation", "Instrumentation"))
         self.bDynamic.setText(_translate("Instrumentation", "Dynamic\nInstrumentation"))
-        self.bPatch.setText(_translate("Instrumentation", "Patch APK"))
+        self.bPatch.setText(_translate("Instrumentation", "Patching"))
         self.bSign.setText(_translate("Instrumentation", "Sign APK"))
         self.bDecompile.setText(_translate("Instrumentation", "Decompile"))
         self.bRecompile.setText(_translate("Instrumentation", "Recompile"))
