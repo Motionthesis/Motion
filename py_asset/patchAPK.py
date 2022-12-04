@@ -56,7 +56,7 @@ class Ui_PatchAPK(object):
             with open(tmpfile) as files:
                 value = files.readline()
                 if value == "1":
-                    location = os.getcwd()
+                    location = os.getcwd().replace("\\","/")
                     self.bTrue()
                     self.lLog.appendPlainText(self.timeLog() + " Merging Succesfull")
                     self.lLog.appendPlainText(self.timeLog() + " APK Location " + location + "/base/dist\n")

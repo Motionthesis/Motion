@@ -13,15 +13,15 @@ class Ui_MainWindow(object):
         try:
             os.mkdir("screenshot")
         except:
-            print("Directory Screenshot Done")
+            pass
         try:
             os.mkdir("log")
         except:
-            print("Directory Log Done")
+            pass
         try:
             os.mkdir("decompile")
         except:
-            print("Directory Decompile Done")
+            pass
             
     def checking(self):
         NotFound = []
@@ -50,10 +50,9 @@ class Ui_MainWindow(object):
         if len(out) == 0:
             NotFound.append("zipalign Not Found\n")
         if len(NotFound) == 0:
-            pass
+            self.Alert()
         elif "Not Found" in NotFound[0]:
             self.noAlert(NotFound)
-            os._exit(1)
               
     #Ui
     def fAlert(self):
@@ -69,9 +68,16 @@ class Ui_MainWindow(object):
         Text = ""
         for i in list:
             Text += i.replace("'","").replace("[","").replace("]","").replace(",","")
-        msg.setText(Text+"Please Install and Re-open the app")
+        msg.setText(Text)
         msg.setIcon(QtWidgets.QMessageBox.Critical)
         msg.exec_()
+    
+    def Alert(self):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Information")
+        msg.setText("Ready To Go")
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+        msg.exec()
     ###
 
     def adbDevice(self):
@@ -118,10 +124,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(QtCore.QSize(571, 140))
-
-        self.checking()
+        
         self.makeDir()
-
+        
         #Check Devices
         self.bCheck = QtWidgets.QPushButton(MainWindow)
         self.bCheck.setGeometry(QtCore.QRect(10, 10, 121, 31))
@@ -151,9 +156,10 @@ class Ui_MainWindow(object):
         self.bUtil.clicked.connect(self.uMenu)
         self.bUtil.clicked.connect(MainWindow.close)
 
-        # self.bDownload = QtWidgets.QPushButton(MainWindow)
-        # self.bDownload.setGeometry(QtCore.QRect(440, 10, 121, 31))
-        # self.bDownload.setObjectName("bDownload")
+        self.bCheckTools = QtWidgets.QPushButton(MainWindow)
+        self.bCheckTools.setGeometry(QtCore.QRect(440, 10, 121, 31))
+        self.bCheckTools.setObjectName("bCheckTools")
+        self.bCheckTools.clicked.connect(self.checking)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -166,7 +172,7 @@ class Ui_MainWindow(object):
         self.bInstall.setText(_translate("MainWindow", "Install APK"))
         self.bDynamic.setText(_translate("MainWindow", "Instrumentation and\nTampering"))
         self.bUtil.setText(_translate("MainWindow", "Utility"))
-        # self.bDownload.setText(_translate("MainWindow", "Download Assets"))
+        self.bCheckTools.setText(_translate("MainWindow", "Check Installed Tools"))
 
 if __name__ == "__main__":
     import sys

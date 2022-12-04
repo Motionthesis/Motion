@@ -7,15 +7,32 @@ import os
 import time
 
 class Ui_DynamicInstrumentation(object):
-
+    
     def bButton(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = instrumentation.Ui_Instrumentation()
         self.ui.setupUi(self.window)
         self.window.show()
+        
+    def fAlert(self,text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Information")
+        msg.setText(text)
+        msg.setIcon(QtWidgets.QMessageBox.Critical)
+        msg.exec_()
 
     appJSON = ""
-
+    
+    def FridaCheck(self):
+        self.tListApp.clear()
+        retval = basicUtils.checkFrida()
+        if retval == 3:
+            self.fAlert("ADB Not Found")
+        elif retval == 1:
+            self.listingAPP()
+        else:
+            self.fAlert("Frida Not Found")
+    
     def crafter(self,script,SorA):
         row = self.tListApp.currentRow()
         if SorA == 0:
@@ -99,7 +116,7 @@ class Ui_DynamicInstrumentation(object):
         self.ListApp = QtWidgets.QPushButton(DynamicInstrumentation)
         self.ListApp.setGeometry(QtCore.QRect(10, 90, 101, 31))
         self.ListApp.setObjectName("ListApp")
-        self.ListApp.clicked.connect(self.listingAPP)
+        self.ListApp.clicked.connect(self.FridaCheck)
 
         # Spawn Button
         self.bSpawn = QtWidgets.QPushButton(DynamicInstrumentation)

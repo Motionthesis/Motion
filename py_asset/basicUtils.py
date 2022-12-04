@@ -97,3 +97,15 @@ def recompile(fileLocation,tmpFile):
 def realRecompile(fileLocation,tmpfile):
     t1 = threading.Thread(target=recompile,args=(fileLocation,tmpfile))
     t1.start()
+    
+def checkFrida():
+    retval = deviceChecking()
+    if retval == 1:
+        return 3
+    else:
+        s = subprocess.Popen(['adb','shell','ps | grep frida'],shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+        out,err = s.communicate()
+        if b"frida" in out:
+            return 1
+        else:
+            return 2

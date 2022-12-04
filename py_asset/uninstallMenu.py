@@ -11,8 +11,25 @@ class Ui_UninstallAPK(object):
         self.ui = utilmenu.Ui_Utility()
         self.ui.setupUi(self.window)
         self.window.show()
+        
+    def gAlert(self,text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Information")
+        msg.setText(text)
+        msg.setIcon(QtWidgets.QMessageBox.Critical)
+        msg.exec_()
 
     appJSON = ""
+    
+    def FridaCheck(self):
+        self.lApps.clear()
+        retval = basicUtils.checkFrida()
+        if retval == 3:
+            self.gAlert("ADB Not Found")
+        elif retval == 1:
+            self.listingAPP()
+        else:
+            self.gAlert("Frida Not Found")
 
     #Ui
     def sAlert(self):
@@ -88,7 +105,7 @@ class Ui_UninstallAPK(object):
         self.bApplist = QtWidgets.QPushButton(UninstallAPK)
         self.bApplist.setGeometry(QtCore.QRect(10, 50, 111, 31))
         self.bApplist.setObjectName("bApplist")
-        self.bApplist.clicked.connect(self.listingAPP)
+        self.bApplist.clicked.connect(self.FridaCheck)
 
         #File Text
         self.eFilename = QtWidgets.QLineEdit(UninstallAPK)
