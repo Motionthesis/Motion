@@ -1,6 +1,9 @@
 # Patch Toast Menu
 from PyQt5 import QtCore, QtGui, QtWidgets
 import py_asset.patchMenu as patchMenu
+import py_asset.basicUtils as basicUtils
+import tempfile
+import time
 
 class Ui_PatchToast(object):
 
@@ -9,6 +12,11 @@ class Ui_PatchToast(object):
         self.ui = patchMenu.Ui_PatchMenu()
         self.ui.setupUi(self.window)
         self.window.show()
+
+    locationWindows = "C:\\"
+
+    def timeLog(self):
+        return time.strftime('[%Y-%m-%d %H:%M:%S]', time.localtime())
 
     def bTrue(self):
         self.bBack.setEnabled(True)
@@ -20,6 +28,44 @@ class Ui_PatchToast(object):
         self.bToast.setEnabled(False)
         self.bSelect.setEnabled(False)
 
+    def sAlert(self,text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Information")
+        msg.setText(text)
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+        msg.exec_()
+
+    def browseFile(self):
+        fileLocation = QtWidgets.QFileDialog.getOpenFileName(None,'Select Smali',self.locationWindows,"Android File (*smali)")
+        self.lPath.setText(fileLocation[0])
+        if len(fileLocation[0]) == 0:
+            self.bToast.setEnabled(False)
+        else:
+            self.bToast.setEnabled(True)
+
+    def tThreading(self,tmpfile):
+        while(True):
+            QtCore.QCoreApplication.processEvents()
+            with open(tmpfile) as files:
+                value = files.readline()
+                if value == "2":
+                    self.bTrue()
+                    self.lLog.appendPlainText(self.timeLog() + " Smali Patch Succesfull")
+                    self.sAlert("Smali Patch Succesfull")
+                    break
+
+    def smaliPatch(self):
+        self.bFalse()
+        filename = self.lPath.text()
+        self.lLog.appendPlainText(self.timeLog() + " Start Patch Smali File")
+        QtGui.QGuiApplication.processEvents()
+        tmpfile = tempfile.gettempdir()
+        tmpfile += "\\test123.tmp"
+        with open(tmpfile,"w") as files:
+            files.write("0")
+        basicUtils.realpatchXML(filename,tmpfile)
+        self.tThreading(tmpfile)
+
     def setupUi(self, PatchToast):
         PatchToast.setObjectName("PatchToast")
         PatchToast.setFixedSize(QtCore.QSize(742, 330))
@@ -27,6 +73,7 @@ class Ui_PatchToast(object):
         self.bSelect = QtWidgets.QPushButton(PatchToast)
         self.bSelect.setGeometry(QtCore.QRect(600, 10, 131, 31))
         self.bSelect.setObjectName("bSelect")
+        self.bSelect.clicked.connect(self.browseFile)
         
         self.bBack = QtWidgets.QPushButton(PatchToast)
         self.bBack.setGeometry(QtCore.QRect(10, 300, 81, 21))
@@ -43,6 +90,7 @@ class Ui_PatchToast(object):
         self.bToast.setGeometry(QtCore.QRect(600, 50, 131, 31))
         self.bToast.setEnabled(False)
         self.bToast.setObjectName("bToast")
+        self.bToast.clicked.connect(self.smaliPatch)
         
         self.lPath = QtWidgets.QLineEdit(PatchToast)
         self.lPath.setGeometry(QtCore.QRect(10, 10, 581, 31))

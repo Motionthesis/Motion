@@ -1,8 +1,23 @@
 # Patch APKS -> APK
 from PyQt5 import QtCore, QtGui, QtWidgets
 import py_asset.patchMenu as patchMenu
+import py_asset.pAPK as pAPK
+import os
+import tempfile
+import time
 
 class Ui_PatchAPKS(object):
+
+    #Global Variable
+    locationWindows = "C:\\"
+    base = os.getcwd()
+
+    #Ui 
+    def timeLog(self):
+        return time.strftime('[%Y-%m-%d %H:%M:%S]', time.localtime())
+
+    def uiUpdate(self):
+        QtGui.QGuiApplication.processEvents()
 
     def bTrue(self):
         self.bApks.setEnabled(True)
@@ -14,6 +29,51 @@ class Ui_PatchAPKS(object):
         self.bBack.setEnabled(False)
         self.bSelect.setEnabled(False)
 
+    def sAlert(self,text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Information")
+        msg.setText(text)
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+        msg.exec_()
+    
+    #BrowseFile
+    def browseFile(self):
+        fileLocation = QtWidgets.QFileDialog.getOpenFileName(None,'Select APKS',self.locationWindows,"Android File (*apks)")
+        self.lPath.setText(fileLocation[0])
+        if len(fileLocation[0]) == 0:
+            self.bApks.setEnabled(False)
+        elif ".apks" in fileLocation[0]:
+            self.bApks.setEnabled(True)
+
+    #Threading
+    def tThreading(self,tmpfile):
+        while(True):
+            QtCore.QCoreApplication.processEvents()
+            with open(tmpfile) as files:
+                value = files.readline()
+                if value == "1":
+                    filename = self.lPath.text()
+                    self.bTrue()
+                    self.lLog.appendPlainText(self.timeLog() + " Merging Succesfull")
+                    self.lLog.appendPlainText(self.timeLog() + " APK Location " + filename + ".out" + "/unknown/base/dist\n")
+                    self.sAlert("Merging Succesfull APK Location " + filename + ".out" + "/unknown/base/dist\n")
+                    os.chdir(self.base)
+                    break
+
+    #Patch APKS -> APK
+    def patch(self):
+        self.bFalse()
+        self.lLog.appendPlainText(self.timeLog() + " Start Merge APKS to APK")
+        self.uiUpdate()
+        tmpfile = tempfile.gettempdir()
+        tmpfile += "\\test123.tmp"
+        with open(tmpfile,"w") as files:
+            files.write("0")
+        filename = self.lPath.text()
+        pAPK.realRun(filename,tmpfile)
+        self.tThreading(tmpfile)
+            
+    #Back Button
     def bButton(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = patchMenu.Ui_PatchMenu()
@@ -27,6 +87,7 @@ class Ui_PatchAPKS(object):
         self.bSelect = QtWidgets.QPushButton(PatchAPKS)
         self.bSelect.setGeometry(QtCore.QRect(600, 10, 131, 31))
         self.bSelect.setObjectName("bSelect")
+        self.bSelect.clicked.connect(self.browseFile)
         
         self.bBack = QtWidgets.QPushButton(PatchAPKS)
         self.bBack.setGeometry(QtCore.QRect(10, 300, 81, 21))
@@ -48,6 +109,7 @@ class Ui_PatchAPKS(object):
         self.bApks.setGeometry(QtCore.QRect(600, 50, 131, 31))
         self.bApks.setObjectName("bApks")
         self.bApks.setEnabled(False)
+        self.bApks.clicked.connect(self.patch)
 
         self.retranslateUi(PatchAPKS)
         QtCore.QMetaObject.connectSlotsByName(PatchAPKS)

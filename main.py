@@ -4,6 +4,7 @@ from py_asset.utilMenu import Ui_Utility
 from py_asset.instrumentation import Ui_Instrumentation
 import py_asset.basicUtils as basicUtils
 import os
+import subprocess
 
 class Ui_MainWindow(object):
 
@@ -11,26 +12,64 @@ class Ui_MainWindow(object):
     def makeDir(self):
         try:
             os.mkdir("screenshot")
-            print("Directory Screenshot Created")
         except:
-            print("Directory Screenshot Exist")
+            print("Directory Screenshot Done")
         try:
             os.mkdir("log")
-            print("Directory Log Created")
         except:
-            print("Directory Log Exist")
-            pass
+            print("Directory Log Done")
         try:
             os.mkdir("decompile")
-            print("Directory Decompile Created")
         except:
-            print("Directory Decompile Exist")
-
+            print("Directory Decompile Done")
+            
+    def checking(self):
+        NotFound = []
+        s = subprocess.Popen("where apktool",shell=True,stdout=subprocess.PIPE)
+        (out,err) = s.communicate()
+        if len(out) == 0:
+            NotFound.append("apktool Not Found\n")
+        s = subprocess.Popen("where jarsigner",shell=True,stdout=subprocess.PIPE)
+        (out,err) = s.communicate()
+        if len(out) == 0:
+            NotFound.append("jarsigner Not Found\n")
+        s = subprocess.Popen("where keytool",shell=True,stdout=subprocess.PIPE)
+        (out,err) = s.communicate()
+        if len(out) == 0:
+            NotFound.append("keytool Not Found\n")
+        s = subprocess.Popen("where apksigner",shell=True,stdout=subprocess.PIPE)
+        (out,err) = s.communicate()
+        if len(out) == 0:
+            NotFound.append("apksigner Not Found\n")
+        s = subprocess.Popen("where adb",shell=True,stdout=subprocess.PIPE)
+        (out,err) = s.communicate()
+        if len(out) == 0:
+            NotFound.append("adb Not Found\n")
+        s = subprocess.Popen("where zipalign",shell=True,stdout=subprocess.PIPE)
+        (out,err) = s.communicate()
+        if len(out) == 0:
+            NotFound.append("zipalign Not Found\n")
+        if len(NotFound) == 0:
+            pass
+        elif "Not Found" in NotFound[0]:
+            self.noAlert(NotFound)
+            os._exit(1)
+              
     #Ui
     def fAlert(self):
         msg = QtWidgets.QMessageBox()
         msg.setWindowTitle("Information")
         msg.setText("No Device Connected")
+        msg.setIcon(QtWidgets.QMessageBox.Critical)
+        msg.exec_()
+    
+    def noAlert(self,list):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Information")
+        Text = ""
+        for i in list:
+            Text += i.replace("'","").replace("[","").replace("]","").replace(",","")
+        msg.setText(Text+"Please Install and Re-open the app")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
         msg.exec_()
     ###
@@ -50,6 +89,7 @@ class Ui_MainWindow(object):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)
         self.window.show()
+
 
     def installMenu(self):
         if self.adbDevice() == 1:
@@ -79,6 +119,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(QtCore.QSize(571, 140))
 
+        self.checking()
         self.makeDir()
 
         #Check Devices
