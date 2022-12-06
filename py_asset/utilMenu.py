@@ -45,8 +45,12 @@ class Ui_Utility(object):
             self.sAlert(str(os.getcwd())+"\\screenshot\\"+ts)
 
     def sShell(self):
-        basicUtils.spawnShell()
-
+        retval = basicUtils.deviceChecking()
+        if retval != 1:
+            basicUtils.spawnShell()
+        else:
+            self.fAlert()
+            
     def setupUi(self, Utility):
         Utility.setObjectName("Utility")
         Utility.setFixedSize(QtCore.QSize(571, 100))

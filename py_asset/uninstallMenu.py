@@ -25,11 +25,11 @@ class Ui_UninstallAPK(object):
         self.lApps.clear()
         retval = basicUtils.checkFrida()
         if retval == 3:
-            self.gAlert("ADB Not Found")
+            self.gAlert("No Device Connected")
         elif retval == 1:
             self.listingAPP()
         else:
-            self.gAlert("Frida Not Found")
+            self.gAlert("Frida Server Not Found")
 
     #Ui
     def sAlert(self):

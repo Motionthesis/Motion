@@ -27,11 +27,11 @@ class Ui_DynamicInstrumentation(object):
         self.tListApp.clear()
         retval = basicUtils.checkFrida()
         if retval == 3:
-            self.fAlert("ADB Not Found")
+            self.fAlert("No Device Connected")
         elif retval == 1:
             self.listingAPP()
         else:
-            self.fAlert("Frida Not Found")
+            self.fAlert("Frida Server Not Found")
     
     def crafter(self,script,SorA):
         row = self.tListApp.currentRow()
