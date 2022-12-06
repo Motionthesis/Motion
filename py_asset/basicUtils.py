@@ -5,7 +5,7 @@ import time
 import threading
 
 def deviceChecking():
-    s = subprocess.check_output(["adb","devices"]).decode().replace('\n\n','\r\n')
+    s = subprocess.check_output(["adb","devices"],shell=True).decode().replace('\n\n','\r\n')
     if(len(s)<30):
         return 1
     else:
@@ -34,7 +34,7 @@ def screenshot():
     ts = time.strftime('%Y%m%d_%H%M%S', time.localtime())
     s = subprocess.Popen(['adb','shell','screencap','-p','/sdcard/Download/'+str(ts)+'.png'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True).wait()
     p = subprocess.Popen(['adb','pull','/sdcard/Download/'+str(ts)+'.png','screenshot/'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True).wait()
-    d = subprocess.Popen(['adb','shell','rm','/sdcard/Download/'+str(ts)+'.png']).wait()
+    d = subprocess.Popen(['adb','shell','rm','/sdcard/Download/'+str(ts)+'.png'],shell=True).wait()
     if s == 1:
         return "1";
     else:
