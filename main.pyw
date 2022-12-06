@@ -75,7 +75,7 @@ class Ui_MainWindow(object):
     def Alert(self):
         msg = QtWidgets.QMessageBox()
         msg.setWindowTitle("Information")
-        msg.setText("Ready To Go")
+        msg.setText("All Tools Installed")
         msg.setIcon(QtWidgets.QMessageBox.Information)
         msg.exec()
     ###
@@ -172,7 +172,7 @@ class Ui_MainWindow(object):
         self.bInstall.setText(_translate("MainWindow", "Install APK"))
         self.bDynamic.setText(_translate("MainWindow", "Instrumentation and\nTampering"))
         self.bUtil.setText(_translate("MainWindow", "Utility"))
-        self.bCheckTools.setText(_translate("MainWindow", "Check Installed Tools"))
+        self.bCheckTools.setText(_translate("MainWindow", "Check Required Tools"))
 
 if __name__ == "__main__":
     import sys
