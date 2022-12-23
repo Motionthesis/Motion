@@ -157,7 +157,7 @@ class Ui_MainWindow(object):
         self.bUtil.clicked.connect(MainWindow.close)
 
         self.bCheckTools = QtWidgets.QPushButton(MainWindow)
-        self.bCheckTools.setGeometry(QtCore.QRect(440, 10, 121, 31))
+        self.bCheckTools.setGeometry(QtCore.QRect(410, 10, 151, 31))
         self.bCheckTools.setObjectName("bCheckTools")
         self.bCheckTools.clicked.connect(self.checking)
 
