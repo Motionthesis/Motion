@@ -25,27 +25,27 @@ class Ui_MainWindow(object):
             
     def checking(self):
         NotFound = []
-        s = subprocess.Popen("where apktool",shell=True,stdout=subprocess.PIPE)
+        s = subprocess.Popen("where apktool",stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
         (out,err) = s.communicate()
         if len(out) == 0:
             NotFound.append("apktool Not Found\n")
-        s = subprocess.Popen("where jarsigner",shell=True,stdout=subprocess.PIPE)
+        s = subprocess.Popen("where jarsigner",stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
         (out,err) = s.communicate()
         if len(out) == 0:
             NotFound.append("jarsigner Not Found\n")
-        s = subprocess.Popen("where keytool",shell=True,stdout=subprocess.PIPE)
+        s = subprocess.Popen("where keytool",stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
         (out,err) = s.communicate()
         if len(out) == 0:
             NotFound.append("keytool Not Found\n")
-        s = subprocess.Popen("where apksigner",shell=True,stdout=subprocess.PIPE)
+        s = subprocess.Popen("where apksigner",stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
         (out,err) = s.communicate()
         if len(out) == 0:
             NotFound.append("apksigner Not Found\n")
-        s = subprocess.Popen("where adb",shell=True,stdout=subprocess.PIPE)
+        s = subprocess.Popen("where adb",stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
         (out,err) = s.communicate()
         if len(out) == 0:
             NotFound.append("adb Not Found\n")
-        s = subprocess.Popen("where zipalign",shell=True,stdout=subprocess.PIPE)
+        s = subprocess.Popen("where zipalign",stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
         (out,err) = s.communicate()
         if len(out) == 0:
             NotFound.append("zipalign Not Found\n")

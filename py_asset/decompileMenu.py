@@ -86,7 +86,6 @@ class Ui_Form(object):
         with open(tmpfile,"w") as files:
             files.write("0")
         base = os.getcwd()
-        print(base)
         self.bFalse()
         realDecompile(fileLocation,base,tmpfile)
         self.tThreading(fileLocation,tmpfile,base)

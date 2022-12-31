@@ -54,9 +54,9 @@ class Ui_PatchAPKS(object):
                 if value == "1":
                     filename = self.lPath.text()
                     self.bTrue()
-                    self.lLog.appendPlainText(self.timeLog() + " Merging Succesfull")
+                    self.lLog.appendPlainText(self.timeLog() + " Merging Succesful")
                     self.lLog.appendPlainText(self.timeLog() + " APK Location " + filename + ".out" + "/unknown/base/dist\n")
-                    self.sAlert("Merging Succesfull APK Location " + filename + ".out" + "/unknown/base/dist\n")
+                    self.sAlert("Merging Succesful APK Location " + filename + ".out" + "/unknown/base/dist\n")
                     os.chdir(self.base)
                     break
 

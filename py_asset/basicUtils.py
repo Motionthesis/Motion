@@ -73,10 +73,10 @@ def decompile(fileLocation,base,tmpFile):
     os.chdir(tmpbase)
     s = subprocess.Popen(['apktool','d','-f',fileLocation],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
     (out,err) = s.communicate()
-    print("===Decompile===")
-    print(f"Decompile Out : {out.decode()}")
-    print(f"Decompile Err : {err}")
-    print("===============")
+    # print("===Decompile===")
+    # print(f"Decompile Out : {out.decode()}")
+    # print(f"Decompile Err : {err}")
+    # print("===============")
     if b'continue' in out:
         with open(tmpFile,"w") as files:
             files.write("1")
@@ -90,7 +90,11 @@ def realDecompile(fileLocation,base,tmpFile):
 def recompile(fileLocation,tmpFile):
     s = subprocess.Popen(['apktool','b','--use-aapt2',fileLocation],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
     out,err = s.communicate()
-    if b"Built apk..." in out:
+    # print("===Recompile===")
+    # print(f"Recompile Out : {out.decode()}")
+    # print(f"Recompile Err : {err}")
+    # print("===============")
+    if b"Built apk" in out:
         with open(tmpFile,"w") as files:
             files.write("1")
 

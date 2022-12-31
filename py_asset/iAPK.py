@@ -12,6 +12,7 @@ baseFolder = os.getcwd()
 def extract(location,platform):
     if platform == "Windows":
         s = subprocess.Popen(['apktool','d','-f',location],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
+        (out,err) = s.communicate()
 
 def install(location,mode,filename,platform,tmpfile):
     os.chdir('decompile')

@@ -50,8 +50,8 @@ class Ui_PatchToast(object):
                 value = files.readline()
                 if value == "2":
                     self.bTrue()
-                    self.lLog.appendPlainText(self.timeLog() + " Smali Patch Succesfull")
-                    self.sAlert("Smali Patch Succesfull")
+                    self.lLog.appendPlainText(self.timeLog() + " Smali Patch Succesful")
+                    self.sAlert("Smali Patch Succesful")
                     break
 
     def smaliPatch(self):

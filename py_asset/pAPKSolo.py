@@ -20,12 +20,12 @@ def cleanXML():
             try:
                 child.attrib.pop("{http://schemas.android.com/apk/res/android}extractNativeLibs")
             except KeyError:
-                print("extractNativeLibs Not Found")
+                # print("extractNativeLibs Not Found")
                 pass
             try:
                 child.attrib.pop("{http://schemas.android.com/apk/res/android}isSplitRequired")
             except KeyError:
-                print("isSplit Not Found")
+                # print("isSplit Not Found")
                 pass
             try:
                 child.attrib.pop("{http://schemas.android.com/apk/res/android}localeConfig")
@@ -96,18 +96,18 @@ def run(folderName,tmpfile):
             extract(folderName+"/"+i)
     os.chdir("base")
     cleanXML()
-    print("[+] Clean XML")
+    # print("[+] Clean XML")
     os.chdir("..")
     file = os.listdir()
-    print(file)
+    # print(file)
     locate = os.getcwd()
-    print(locate)
+    # print(locate)
     moveFile(file,"\\","base")
-    print("[+] Move File")
+    # print("[+] Move File")
     apkYML(file,"\\","base")
-    print("[+] Apktool YML")
+    # print("[+] Apktool YML")
     compile(os.getcwd() + "\\base")
-    print("[+] Compile")
+    # print("[+] Compile")
     os.chdir(base)
     with open(tmpfile,"w") as files:
         files.write("1")

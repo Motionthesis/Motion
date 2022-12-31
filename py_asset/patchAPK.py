@@ -58,9 +58,9 @@ class Ui_PatchAPK(object):
                 if value == "1":
                     location = os.getcwd().replace("\\","/")
                     self.bTrue()
-                    self.lLog.appendPlainText(self.timeLog() + " Merging Succesfull")
+                    self.lLog.appendPlainText(self.timeLog() + " Merging Succesful")
                     self.lLog.appendPlainText(self.timeLog() + " APK Location " + location + "/base/dist\n")
-                    self.sAlert("Merging Succesfull APK Location " + location + "/base/dist\n")
+                    self.sAlert("Merging Succesful APK Location " + location + "/base/dist\n")
                     os.chdir(self.base)
                     break
 
