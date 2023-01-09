@@ -110,7 +110,7 @@ class Ui_SignAPK(object):
         self.lLog.setObjectName("lLog")
         
         self.cAndroid = QtWidgets.QCheckBox(SignAPK)
-        self.cAndroid.setGeometry(QtCore.QRect(520, 50, 91, 31))
+        self.cAndroid.setGeometry(QtCore.QRect(510, 50, 91, 31))
         self.cAndroid.setObjectName("cAndroid")
 
         self.bBack = QtWidgets.QPushButton(SignAPK)
