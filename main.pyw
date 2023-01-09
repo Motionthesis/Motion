@@ -15,10 +15,6 @@ class Ui_MainWindow(object):
         except:
             pass
         try:
-            os.mkdir("log")
-        except:
-            pass
-        try:
             os.mkdir("decompile")
         except:
             pass
