@@ -34,6 +34,7 @@ class Ui_PatchMenu(object):
     def setupUi(self, PatchMenu):
         PatchMenu.setObjectName("PatchMenu")
         PatchMenu.setFixedSize(QtCore.QSize(531, 100))
+        PatchMenu.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.bBack = QtWidgets.QPushButton(PatchMenu)
         self.bBack.setGeometry(QtCore.QRect(10, 70, 81, 21))

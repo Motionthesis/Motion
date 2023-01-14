@@ -48,6 +48,7 @@ class Ui_Instrumentation(object):
     def setupUi(self, Instrumentation):
         Instrumentation.setObjectName("Instrumentation")
         Instrumentation.setFixedSize(QtCore.QSize(571, 170))
+        Instrumentation.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.bDynamic = QtWidgets.QPushButton(Instrumentation)
         self.bDynamic.setGeometry(QtCore.QRect(30, 10, 151, 51))

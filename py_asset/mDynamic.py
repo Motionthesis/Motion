@@ -16,6 +16,7 @@ class Ui_DynamicInstrumentation(object):
         
     def fAlert(self,text):
         msg = QtWidgets.QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText(text)
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -98,6 +99,7 @@ class Ui_DynamicInstrumentation(object):
     def setupUi(self, DynamicInstrumentation):
         DynamicInstrumentation.setObjectName("DynamicInstrumentation")
         DynamicInstrumentation.setFixedSize(QtCore.QSize(741, 370))
+        DynamicInstrumentation.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.ComboBox = QtWidgets.QComboBox(DynamicInstrumentation)
         self.ComboBox.setGeometry(QtCore.QRect(10, 50, 321, 31))

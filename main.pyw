@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets, QtGui
 from py_asset.installAPK import Ui_InstallAPK
 from py_asset.utilMenu import Ui_Utility
 from py_asset.instrumentation import Ui_Instrumentation
@@ -53,6 +53,7 @@ class Ui_MainWindow(object):
     #Ui
     def fAlert(self):
         msg = QtWidgets.QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("No Device Connected")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -70,6 +71,7 @@ class Ui_MainWindow(object):
     
     def Alert(self):
         msg = QtWidgets.QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("All Tools Installed")
         msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -120,7 +122,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(QtCore.QSize(571, 140))
-        
+        MainWindow.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
+
         self.makeDir()
         
         #Check Devices

@@ -27,6 +27,7 @@ class Ui_InstallAPK(object):
 
     def sAlert(self):
         msg = QtWidgets.QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("Installation Success")
         msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -34,6 +35,7 @@ class Ui_InstallAPK(object):
 
     def fAlert(self):
         msg = QtWidgets.QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("Fail to Install")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -41,6 +43,7 @@ class Ui_InstallAPK(object):
     
     def dAlert(self):
         msg = QtWidgets.QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("No Device Connected")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -48,6 +51,7 @@ class Ui_InstallAPK(object):
 
     def lAlert(self):
         msg = QtWidgets.QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("Please Input a File")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -118,6 +122,7 @@ class Ui_InstallAPK(object):
     def setupUi(self, InstallAPK):
         InstallAPK.setObjectName("InstallAPK")
         InstallAPK.setFixedSize(QtCore.QSize(741, 330))
+        InstallAPK.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         #Install APK Button
         self.installButton = QtWidgets.QPushButton(InstallAPK)

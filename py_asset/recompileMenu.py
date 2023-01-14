@@ -28,6 +28,7 @@ class Ui_Recompile(object):
 
     def sAlert(self,text):
         msg = QtWidgets.QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText(text)
         msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -78,6 +79,7 @@ class Ui_Recompile(object):
     def setupUi(self, Recompile):
         Recompile.setObjectName("Recompile")
         Recompile.setFixedSize(QtCore.QSize(741, 330))
+        Recompile.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.bRecompile = QtWidgets.QPushButton(Recompile)
         self.bRecompile.setGeometry(QtCore.QRect(600, 50, 131, 31))
