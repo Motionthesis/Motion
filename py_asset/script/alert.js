@@ -3,7 +3,7 @@ Java.perform(function(){
     Java.use("android.app.Activity").onUserInteraction.implementation = function() { 
         var AlertDialogBuilder = Java.use("android.app.AlertDialog$Builder"); 
         console.log('No Protection Againts Dyanmic Instrumentation'); 
-        var test = JavaString.$new.overload("java.lang.String").call(JavaString,"Skripsi Final (Dynamic Instrumentation)"); 
+        var test = JavaString.$new.overload("java.lang.String").call(JavaString,"Motion (Dynamic Instrumentation)"); 
         var alert = AlertDialogBuilder.$new(this);
         alert.setTitle(test);
         alert.setMessage(test);

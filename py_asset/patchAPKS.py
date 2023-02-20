@@ -52,11 +52,12 @@ class Ui_PatchAPKS(object):
             with open(tmpfile) as files:
                 value = files.readline()
                 if value == "1":
-                    filename = self.lPath.text()
+                    location = os.getcwd().replace("\\", "/")
+                    filename = self.lPath.text().split("/")[-1]
                     self.bTrue()
                     self.lLog.appendPlainText(self.timeLog() + " Merging Succesful")
-                    self.lLog.appendPlainText(self.timeLog() + " APK Location " + filename + ".out" + "/unknown/base/dist\n")
-                    self.sAlert("Merging Succesful APK Location " + filename + ".out" + "/unknown/base/dist\n")
+                    self.lLog.appendPlainText(self.timeLog() + " APK Location " + location + "/" + filename + ".out" + "/unknown/base/dist\n")
+                    self.sAlert("Merging Succesful APK Location " + location + "/" + filename + ".out" + "/unknown/base/dist\n")
                     os.chdir(self.base)
                     break
 

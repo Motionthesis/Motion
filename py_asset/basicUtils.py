@@ -52,7 +52,7 @@ def patchXML(filename,tmpfile):
     payload = \
     """
     const/4 v0, 0x1\n
-    const-string v1, "Skripsi - No Integrity Check"\n
+    const-string v1, "Motion - No Integrity Check"\n
     invoke-static {p0, v1, v0}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;\n
     move-result-object v0\n
     invoke-virtual {v0}, Landroid/widget/Toast;->show()V\n    
