@@ -1,9 +1,12 @@
 # Patch Toast Menu
-from PyQt5 import QtCore, QtGui, QtWidgets
-import py_asset.patchMenu as patchMenu
-import py_asset.basicUtils as basicUtils
 import tempfile
 import time
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+import py_asset.basicUtils as basicUtils
+import py_asset.patchMenu as patchMenu
+
 
 class Ui_PatchToast(object):
 

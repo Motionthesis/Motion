@@ -1,10 +1,12 @@
 # Recompile Menu
-from PyQt5 import QtCore, QtGui, QtWidgets
-from py_asset.basicUtils import realRecompile
-import py_asset.instrumentation as instrumentation
-import time
-import subprocess
 import tempfile
+import time
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+import py_asset.instrumentation as instrumentation
+from py_asset.basicUtils import realRecompile
+
 
 class Ui_Recompile(object):
     

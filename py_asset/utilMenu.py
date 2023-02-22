@@ -1,11 +1,17 @@
 #Util Menu
-from PyQt5 import QtCore, QtGui, QtWidgets
-from py_asset.uninstallMenu import Ui_UninstallAPK
-import py_asset.basicUtils as basicUtils  
 import os
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+import py_asset.basicUtils as basicUtils
+from py_asset.uninstallMenu import Ui_UninstallAPK
+
 
 class Ui_Utility(object):
 
+    """
+        Back Button ke Main Menu (Main.pyw)
+    """
     def bButton(self):
         import main
         self.window = QtWidgets.QMainWindow()
@@ -13,7 +19,9 @@ class Ui_Utility(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
-    #UI
+    """
+        Alert Spawner
+    """
     def sAlert(self,filename):
         msg = QtWidgets.QMessageBox()
         msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
@@ -29,16 +37,19 @@ class Ui_Utility(object):
         msg.setText("No Device Connected")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
         msg.exec_()
-    ###
 
-    #Call Menu
+    """
+        Call Uninstall Menu (Pindah Ke Menu Uninstall dari Util Menu)
+    """
     def uninstallMenu(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_UninstallAPK()
         self.ui.setupUi(self.window)
         self.window.show()
-    ###
-
+    
+    """
+        Melakukan Screenshot
+    """
     def screenshotUI(self):
         ts = basicUtils.screenshot()
         if ts == "1":
@@ -46,6 +57,9 @@ class Ui_Utility(object):
         else:
             self.sAlert(str(os.getcwd())+"\\screenshot\\"+ts)
 
+    """
+        Spawn ADB Shell
+    """
     def sShell(self):
         retval = basicUtils.deviceChecking()
         if retval != 1:

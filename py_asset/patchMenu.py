@@ -1,9 +1,11 @@
 # Patch Menu (Toast,Multiple,APKS)
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 import py_asset.instrumentation as instrumentation
-from py_asset.patchToast import Ui_PatchToast
+from py_asset.patchAPK import Ui_PatchAPK
 from py_asset.patchAPKS import Ui_PatchAPKS
-from py_asset.patchAPK import Ui_PatchAPK 
+from py_asset.patchToast import Ui_PatchToast
+
 
 class Ui_PatchMenu(object):
 

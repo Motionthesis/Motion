@@ -1,14 +1,21 @@
-from PyQt5 import QtCore, QtWidgets, QtGui
-from py_asset.installAPK import Ui_InstallAPK
-from py_asset.utilMenu import Ui_Utility
-from py_asset.instrumentation import Ui_Instrumentation
-import py_asset.basicUtils as basicUtils
+# Main Menu
 import os
 import subprocess
 
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+import py_asset.basicUtils as basicUtils
+from py_asset.installAPK import Ui_InstallAPK
+from py_asset.instrumentation import Ui_Instrumentation
+from py_asset.utilMenu import Ui_Utility
+
+
 class Ui_MainWindow(object):
 
-    #Run Firstime
+    """
+        Run Firstime
+        Apps bakal coba testing nge create folder screenshot ama decompile kalau udah ada bakal lanjut kalau belum bakal di create
+    """
     def makeDir(self):
         try:
             os.mkdir("screenshot")
@@ -19,6 +26,16 @@ class Ui_MainWindow(object):
         except:
             pass
             
+    """
+        Checking Installed Tools
+        Apps bakal ngecheck installed tools jika tidak ada maka akan di alert
+            -   Apktool
+            -   Jarsigner
+            -   Keytool
+            -   Apksigner
+            -   ADB
+            -   Zipalign
+    """        
     def checking(self):
         NotFound = []
         s = subprocess.Popen("where apktool",stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
@@ -50,7 +67,9 @@ class Ui_MainWindow(object):
         elif "Not Found" in NotFound[0]:
             self.noAlert(NotFound)
               
-    #Ui
+    """
+        Alert UI Spawner
+    """
     def fAlert(self):
         msg = QtWidgets.QMessageBox()
         msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
@@ -76,8 +95,11 @@ class Ui_MainWindow(object):
         msg.setText("All Tools Installed")
         msg.setIcon(QtWidgets.QMessageBox.Information)
         msg.exec()
-    ###
-
+    
+    """
+        Device Checker
+        Menggunakan ADB Untuk melakukan pengecekan device jika device tersedia maka device akan tertulis connected
+    """
     def adbDevice(self):
         value = basicUtils.deviceChecking()
         if value == 1:
@@ -87,7 +109,13 @@ class Ui_MainWindow(object):
             self.lCheck.setText("Connected")
             return value
     
-    #Call Menu
+    """
+        Menu Spawner
+        Own Menu -> Menu Awal (Main Menu)
+        Install Menu -> Pindah Ke Menu Install
+        uMenu -> Pindah Ke Menu Util
+        iMenu -> Pindah Ke Menu Instrumentation
+    """
     def ownMenu(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
@@ -116,9 +144,12 @@ class Ui_MainWindow(object):
         self.ui = Ui_Instrumentation()
         self.ui.setupUi(self.window)
         self.window.show()
-    ###
+    
 
-        
+    """
+        PYQT5 Object Build
+        Front End Code
+    """
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(QtCore.QSize(571, 140))

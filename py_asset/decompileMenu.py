@@ -1,28 +1,42 @@
-# Decompile Menu
-from PyQt5 import QtCore, QtGui, QtWidgets
-from py_asset.basicUtils import realDecompile
-import py_asset.instrumentation as instrumentation
-import tempfile
-import subprocess
+# Decompile Menu Front End
 import os
+import tempfile
 import time
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+import py_asset.instrumentation as instrumentation
+from py_asset.basicUtils import realDecompile
+
 
 class Ui_Form(object):
     
+    """
+        Tombol Back Ke UI Sebelumnya
+    """
     def bButton(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = instrumentation.Ui_Instrumentation()
+        self.ui = instrumentation.Ui_Instrumentation() # Baris INI Tujuan Back
         self.ui.setupUi(self.window)
         self.window.show()
 
-    locationWindows = 'C:\\'
+    locationWindows = 'C:\\' # Variable Buat Pas Select FIle
 
+    """
+        Time Compile
+    """
     def timeLog(self):
         return time.strftime('[%Y-%m-%d %H:%M:%S]', time.localtime())
     
+    """
+        Threading UI
+    """
     def uiUpdate(self):
         QtCore.QCoreApplication.processEvents()
 
+    """
+        Alert Error Information Alert Done Install 
+    """
     def sAlert(self,text):
         msg = QtWidgets.QMessageBox()
         msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
@@ -30,7 +44,10 @@ class Ui_Form(object):
         msg.setText(text)
         msg.setIcon(QtWidgets.QMessageBox.Information)
         msg.exec_()
-
+        
+    """
+        Button Bisa Click Apa GK
+    """
     def bTrue(self):
         self.bSelect.setEnabled(True)
         self.bBack.setEnabled(True)
@@ -41,6 +58,9 @@ class Ui_Form(object):
         self.bBack.setEnabled(False)
         self.bDecompile.setEnabled(False)
     
+    """
+        Browser File (Pilih File)
+    """
     def browseFile(self):
         fileLocation = QtWidgets.QFileDialog.getOpenFileName(None,'Select APK\S',self.locationWindows,"Android File (*apk *apks)")
         self.lPath.setText(fileLocation[0])
@@ -49,7 +69,11 @@ class Ui_Form(object):
             self.bDecompile.setEnabled(True)
         else:
             self.bDecompile.setEnabled(False)
-
+            
+    """
+        Threading TMP File
+        Munculin Alert Dan Isi Log
+    """
     def tThreading(self,fileLocation,tmpfile,base):
         tmpName = fileLocation.split("/")[-1]
         tmpbase = base+"\\decompile"
@@ -78,6 +102,9 @@ class Ui_Form(object):
                         self.bTrue()
                         break
 
+    """
+        Decompile Front End
+    """
     def decompile(self):
         fileLocation = self.lPath.text()
         self.lLog.appendPlainText(self.timeLog() + ' Start Decompile')

@@ -1,10 +1,13 @@
-# Frida Menu
-from PyQt5 import QtCore, QtGui, QtWidgets
-import py_asset.instrumentation as instrumentation
-import py_asset.basicUtils as basicUtils
+# Frida Menu + Backend
 import json
 import os
 import time
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+import py_asset.basicUtils as basicUtils
+import py_asset.instrumentation as instrumentation
+
 
 class Ui_DynamicInstrumentation(object):
     
@@ -22,7 +25,7 @@ class Ui_DynamicInstrumentation(object):
         msg.setIcon(QtWidgets.QMessageBox.Critical)
         msg.exec_()
 
-    appJSON = ""
+    appJSON = "" # Variable AppList
     
     def FridaCheck(self):
         self.tListApp.clear()
@@ -34,8 +37,12 @@ class Ui_DynamicInstrumentation(object):
         else:
             self.fAlert("Frida Server Not Found")
     
+    """
+        SorA 0 -> Spawn Identifier
+        Else -> Attach PID
+    """
     def crafter(self,script,SorA):
-        row = self.tListApp.currentRow()
+        row = self.tListApp.currentRow() # Getting Index APP Target
         if SorA == 0:
             idtf = self.appJSON[row]['identifier']
             if script == 0:
@@ -63,8 +70,8 @@ class Ui_DynamicInstrumentation(object):
         # text
         # value = self.ComboBox.currentText()
         # currentIndex
-        value = self.ComboBox.currentIndex()
-        com = self.crafter(value,0)
+        value = self.ComboBox.currentIndex() # Getting Index Mode (SSL Pinning / Root / Alert)
+        com = self.crafter(value,0) # String Command
         os.system(com)
         time.sleep(1.7)
         self.listingAPP()
@@ -76,6 +83,9 @@ class Ui_DynamicInstrumentation(object):
         time.sleep(1.7)
         self.listingAPP()
 
+    """
+        List APP Sorted A-Z
+    """
     def listingAPP(self):
         self.bSpawn.setEnabled(False)
         self.bAttach.setEnabled(False)
@@ -87,6 +97,9 @@ class Ui_DynamicInstrumentation(object):
         for i in self.appJSON:
             self.tListApp.addItem(i['name'])
     
+    """
+        Name => Maps || Pid => 24761 (Isi text field)
+    """
     def currentAPP(self):
         row = self.tListApp.currentRow()
         self.tApp.setText("Name => " + self.appJSON[row]['name'] + " || Pid => " + str(self.appJSON[row]['pid']))

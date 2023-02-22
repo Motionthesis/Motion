@@ -1,10 +1,12 @@
 # Instrumentation Menu
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 from py_asset.decompileMenu import Ui_Form
+from py_asset.mDynamic import Ui_DynamicInstrumentation
+from py_asset.patchMenu import Ui_PatchMenu
 from py_asset.recompileMenu import Ui_Recompile
 from py_asset.signMenu import Ui_SignAPK
-from py_asset.patchMenu import Ui_PatchMenu
-from py_asset.mDynamic import Ui_DynamicInstrumentation
+
 
 class Ui_Instrumentation(object):
 

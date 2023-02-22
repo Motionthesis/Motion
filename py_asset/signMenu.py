@@ -1,34 +1,55 @@
 # Sign Menu
-from PyQt5 import QtCore, QtGui, QtWidgets
-import py_asset.instrumentation as instrumentation
 import os
 import subprocess
 import time
 
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+import py_asset.instrumentation as instrumentation
+
+
 class Ui_SignAPK(object):
 
+    """
+        Button Balik Ke Menu Instrumentation
+    """
     def bButton(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = instrumentation.Ui_Instrumentation()
         self.ui.setupUi(self.window)
         self.window.show()
     
+    """
+        Set Enabled Button (Button Bisa Tekan)
+    """
     def bTrue(self):
         self.bSelect.setEnabled(True)
         self.bSign.setEnabled(True)
         self.cAndroid.setEnabled(True)
         self.bBack.setEnabled(True)
     
+    """
+        Set Disable Button (Button Tidak Bisa Di Tekan)
+    """
     def bFalse(self):
         self.bSelect.setEnabled(False)
         self.bSign.setEnabled(False)
         self.cAndroid.setEnabled(False)
         self.bBack.setEnabled(False)
         
+    """
+        Variable Buat Biar Setiap Buka Open File / Directory Selalu Di LocalDisk C
+    """
     locationWindows = "C:\\"
 
+    """
+        Variable Buat Tau File Ini Dari Mana (Find Main.pyw Location)
+    """
     base = os.getcwd()
 
+    """
+        Alert Spawner
+    """
     def sAlert(self,text):
         msg = QtWidgets.QMessageBox()
         msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
@@ -37,12 +58,21 @@ class Ui_SignAPK(object):
         msg.setIcon(QtWidgets.QMessageBox.Information)
         msg.exec_()
 
+    """
+        Time Logging (Nge Munculin Time Execute Di Front End)
+    """
     def timeLog(self):
         return time.strftime('[%Y-%m-%d %H:%M:%S]', time.localtime())
     
+    """
+        Threading Buat UI Gak Not Responding
+    """
     def uiUpdate(self):
         QtGui.QGuiApplication.processEvents()
 
+    """
+        Browse File (User Milih APK)
+    """
     def browseFile(self):
         fileLocation = QtWidgets.QFileDialog.getOpenFileName(None,'Select APK',self.locationWindows,"Android File (*apk)")
         self.lPath.setText(fileLocation[0])
@@ -51,6 +81,11 @@ class Ui_SignAPK(object):
         else:
             self.bSign.setEnabled(False)
 
+    """
+        Sign APK
+        -  Sign With Jarsigner (< 11)
+        -  Sign With APKSigner (> 11)
+    """
     def sign(self):
         self.bFalse()
         fileLocation = self.lPath.text()
@@ -59,15 +94,15 @@ class Ui_SignAPK(object):
         self.lLog.appendPlainText(self.timeLog() + " Signing " + tmpLocation[-1])
         self.uiUpdate()
         os.chdir(tmp)
-        s = subprocess.Popen(['keytool','-genkey','-noprompt','-keystore' ,'file.keystore','-alias','alias1','-keysize','2048','-validity','10000','-dname', 'CN=pp,OU=ID,O=IBM,L=H,S=H,C=GB', '-storepass','123456', '-keypass','123456','-keyalg','RSA'],stdout=subprocess.PIPE,stderr=subprocess.PIPE,shell=True).wait()
+        s = subprocess.Popen(['keytool','-genkey','-noprompt','-keystore' ,'file.keystore','-alias','alias1','-keysize','2048','-validity','10000','-dname', 'CN=pp,OU=ID,O=IBM,L=H,S=H,C=GB', '-storepass','123456', '-keypass','123456','-keyalg','RSA'],stdout=subprocess.PIPE,stderr=subprocess.PIPE,shell=True).wait() # Generate Keystore
         self.lLog.appendPlainText(self.timeLog() + " Keystore Generated")
         self.uiUpdate()
-        if self.cAndroid.isChecked():
+        if self.cAndroid.isChecked(): #APK Signer Process (Zipalign -> APKSigner)
             y = subprocess.Popen(['zipalign','-p','-f','4',fileLocation,'signed.apk'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             c = subprocess.Popen(['apksigner','sign','--ks-key-alias','alias1','--ks','file.keystore','--ks-pass','pass:123456','signed.apk'],stdout=subprocess.PIPE,stderr=subprocess.PIPE,shell=True)
             self.lLog.appendPlainText(self.timeLog() + " APK Sign By APKSigner")
             self.uiUpdate()
-        else:
+        else: #Jarsigner Process (Jarsigner -> ZipAlign)
             x = subprocess.Popen(['jarsigner','-sigalg','SHA1withRSA','-digestalg','SHA1','-keystore','file.keystore',fileLocation,'alias1','-storepass','123456','-keypass','123456'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             out,err = x.communicate()
             # print(out,err)

@@ -1,8 +1,9 @@
-# Basic Utils Menu
-import subprocess
+# Basic Utils Backend
 import os
-import time
+import subprocess
 import threading
+import time
+
 
 def deviceChecking():
     s = subprocess.check_output(["adb","devices"],shell=True).decode().replace('\n\n','\r\n')
@@ -12,24 +13,39 @@ def deviceChecking():
         return s.split("\r\n")[1].split('\t')[0]
 
 #Need Adjusting if Won't Work in Linux or MacOS
+"""
+    Frida List -> SEMUA
+"""
 def fridaList():
     s = subprocess.Popen(['frida-ps','-Uaij'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
     (out,err) = s.communicate()
     return out
 
+"""
+    ActiveList -> Ada PID Only
+"""
 def activeList():
     s = subprocess.Popen(['frida-ps','-Uaj'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
     (out,err) = s.communicate()
     return out
 
+"""
+    Uninstall APP
+"""
 def uninstall(packageName):
     s = subprocess.Popen(['adb','uninstall',packageName],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
     (out,err) = s.communicate()
     return out
 
+"""
+    Spawn Shell
+"""
 def spawnShell():
     os.system("start cmd /c adb shell")
 
+"""
+    Screenshoot
+"""
 def screenshot():
     ts = time.strftime('%Y%m%d_%H%M%S', time.localtime())
     s = subprocess.Popen(['adb','shell','screencap','-p','/sdcard/Download/'+str(ts)+'.png'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True).wait()
@@ -42,9 +58,9 @@ def screenshot():
 
 # Patch Smali
 def patchXML(filename,tmpfile):
-    with open(filename,"r") as files:
-        smali = files.readlines()
-    injectPosition = 0
+    with open(filename,"r") as files: # Baca Inputan File Smali
+        smali = files.readlines() # Baca Semua Linenya
+    injectPosition = 0 # Variable Injection 0
     for i in range (len(smali)):
         if '# virtual methods' in smali[i]:
             injectPosition = i+3
@@ -57,10 +73,10 @@ def patchXML(filename,tmpfile):
     move-result-object v0\n
     invoke-virtual {v0}, Landroid/widget/Toast;->show()V\n    
     """
-    value = ''.join(smali[:injectPosition]) + payload + ''.join(smali[injectPosition:])
-    with open(filename,"w") as files:
+    value = ''.join(smali[:injectPosition]) + payload + ''.join(smali[injectPosition:]) # Ambil Depan + Payload + Belakang
+    with open(filename,"w") as files: # Smali File
         files.write(value)
-    with open(tmpfile,"w") as files:
+    with open(tmpfile,"w") as files: # Ngecheck Udah Kelar Apa Belum
         files.write("2")
 
 def realpatchXML(filename,tmpfile):

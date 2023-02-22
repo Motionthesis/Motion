@@ -1,12 +1,13 @@
 # Install APK Menu
-from platform import platform
-from PyQt5 import QtCore, QtGui, QtWidgets
 import platform
-import time
 import tempfile
-import os
+import time
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
 import py_asset.basicUtils as basicUtils
 import py_asset.iAPK as insAPK
+
 
 class Ui_InstallAPK(object):
 

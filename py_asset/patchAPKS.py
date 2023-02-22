@@ -1,10 +1,13 @@
-# Patch APKS -> APK
-from PyQt5 import QtCore, QtGui, QtWidgets
-import py_asset.patchMenu as patchMenu
-import py_asset.pAPK as pAPK
+# Patch APKS -> APK Menu
 import os
 import tempfile
 import time
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+import py_asset.pAPK as pAPK
+import py_asset.patchMenu as patchMenu
+
 
 class Ui_PatchAPKS(object):
 

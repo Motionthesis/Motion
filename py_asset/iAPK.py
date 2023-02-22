@@ -1,10 +1,9 @@
 # Install APK Backend
-from pathlib import Path
-import subprocess
 import os
-import shutil
-import time
+import subprocess
 import threading
+import time
+from pathlib import Path
 
 baseFolder = os.getcwd()
 # win = chr(92)
@@ -14,6 +13,10 @@ def extract(location,platform):
         s = subprocess.Popen(['apktool','d','-f',location],stdin=subprocess.PIPE,stdout=subprocess.PIPE,shell=True)
         (out,err) = s.communicate()
 
+"""
+    Mode 1 -> APK
+    APKS Sisanya
+"""
 def install(location,mode,filename,platform,tmpfile):
     os.chdir('decompile')
     base = os.getcwd()
