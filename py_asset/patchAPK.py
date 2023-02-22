@@ -83,7 +83,6 @@ class Ui_PatchAPK(object):
     def setupUi(self, PatchAPK):
         PatchAPK.setObjectName("PatchAPK")
         PatchAPK.setFixedSize(QtCore.QSize(742, 330))
-        PatchAPK.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.lLog = QtWidgets.QPlainTextEdit(PatchAPK)
         self.lLog.setGeometry(QtCore.QRect(10, 90, 721, 200))

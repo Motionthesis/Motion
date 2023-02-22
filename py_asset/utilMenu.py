@@ -1,7 +1,7 @@
 #Util Menu
 import os
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 import py_asset.basicUtils as basicUtils
 from py_asset.uninstallMenu import Ui_UninstallAPK
@@ -24,7 +24,6 @@ class Ui_Utility(object):
     """
     def sAlert(self,filename):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText(filename)
         msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -32,7 +31,6 @@ class Ui_Utility(object):
     
     def fAlert(self):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("No Device Connected")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -70,7 +68,6 @@ class Ui_Utility(object):
     def setupUi(self, Utility):
         Utility.setObjectName("Utility")
         Utility.setFixedSize(QtCore.QSize(571, 100))
-        Utility.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.bUninstall = QtWidgets.QPushButton(Utility)
         self.bUninstall.setGeometry(QtCore.QRect(390, 10, 151, 51))

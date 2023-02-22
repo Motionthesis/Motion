@@ -72,7 +72,6 @@ class Ui_PatchToast(object):
     def setupUi(self, PatchToast):
         PatchToast.setObjectName("PatchToast")
         PatchToast.setFixedSize(QtCore.QSize(742, 330))
-        PatchToast.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
  
         self.bSelect = QtWidgets.QPushButton(PatchToast)
         self.bSelect.setGeometry(QtCore.QRect(600, 10, 131, 31))

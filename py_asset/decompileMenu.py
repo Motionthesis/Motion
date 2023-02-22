@@ -3,7 +3,7 @@ import os
 import tempfile
 import time
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 import py_asset.instrumentation as instrumentation
 from py_asset.basicUtils import realDecompile
@@ -39,7 +39,6 @@ class Ui_Form(object):
     """
     def sAlert(self,text):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText(text)
         msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -121,7 +120,6 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.setFixedSize(741, 330)
-        Form.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.lLog = QtWidgets.QPlainTextEdit(Form)
         self.lLog.setGeometry(QtCore.QRect(10, 90, 721, 200))

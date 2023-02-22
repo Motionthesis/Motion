@@ -1,7 +1,7 @@
 #Uninstall Menu
 import json
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 import py_asset.basicUtils as basicUtils
 import py_asset.utilMenu as utilmenu
@@ -23,7 +23,6 @@ class Ui_UninstallAPK(object):
     """
     def gAlert(self,text):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText(text)
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -53,7 +52,6 @@ class Ui_UninstallAPK(object):
     """
     def sAlert(self):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("Uninstall Success")
         msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -61,7 +59,6 @@ class Ui_UninstallAPK(object):
 
     def fAlert(self):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("Fail to Uninstall")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -69,7 +66,6 @@ class Ui_UninstallAPK(object):
 
     def lAlert(self):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("Cant Find Package or Apps")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -122,7 +118,6 @@ class Ui_UninstallAPK(object):
     def setupUi(self, UninstallAPK):
         UninstallAPK.setObjectName("UninstallAPK")
         UninstallAPK.setFixedSize(QtCore.QSize(741, 330))
-        UninstallAPK.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         #Listing Apps
         self.lApps = QtWidgets.QListWidget(UninstallAPK)

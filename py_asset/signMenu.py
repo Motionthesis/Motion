@@ -52,7 +52,6 @@ class Ui_SignAPK(object):
     """
     def sAlert(self,text):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText(text)
         msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -123,7 +122,6 @@ class Ui_SignAPK(object):
     def setupUi(self, SignAPK):
         SignAPK.setObjectName("SignAPK")
         SignAPK.setFixedSize(QtCore.QSize(741, 330))
-        SignAPK.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.lPath = QtWidgets.QLineEdit(SignAPK)
         self.lPath.setGeometry(QtCore.QRect(10, 10, 581, 31))

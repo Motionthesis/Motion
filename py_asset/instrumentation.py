@@ -1,5 +1,5 @@
 # Instrumentation Menu
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 from py_asset.decompileMenu import Ui_Form
 from py_asset.mDynamic import Ui_DynamicInstrumentation
@@ -50,7 +50,6 @@ class Ui_Instrumentation(object):
     def setupUi(self, Instrumentation):
         Instrumentation.setObjectName("Instrumentation")
         Instrumentation.setFixedSize(QtCore.QSize(571, 170))
-        Instrumentation.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.bDynamic = QtWidgets.QPushButton(Instrumentation)
         self.bDynamic.setGeometry(QtCore.QRect(30, 10, 151, 51))

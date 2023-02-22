@@ -87,7 +87,6 @@ class Ui_PatchAPKS(object):
     def setupUi(self, PatchAPKS):
         PatchAPKS.setObjectName("PatchAPKS")
         PatchAPKS.setFixedSize(QtCore.QSize(742, 330))
-        PatchAPKS.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.bSelect = QtWidgets.QPushButton(PatchAPKS)
         self.bSelect.setGeometry(QtCore.QRect(600, 10, 131, 31))

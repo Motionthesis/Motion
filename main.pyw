@@ -72,7 +72,6 @@ class Ui_MainWindow(object):
     """
     def fAlert(self):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("No Device Connected")
         msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -90,7 +89,6 @@ class Ui_MainWindow(object):
     
     def Alert(self):
         msg = QtWidgets.QMessageBox()
-        msg.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
         msg.setWindowTitle("Information")
         msg.setText("All Tools Installed")
         msg.setIcon(QtWidgets.QMessageBox.Information)
@@ -153,7 +151,6 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(QtCore.QSize(571, 140))
-        MainWindow.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
 
         self.makeDir()
         
@@ -207,6 +204,7 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    app.setWindowIcon(QtGui.QIcon('py_asset/logo.png'))
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
